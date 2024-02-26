@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>Computer Science A-Level Demos</title>
+      <style>
+          body {
+              background-image: url("../../../background.webp");
+              background-repeat: no-repeat;
+              background-size: cover;
+
+              display: flex;
+              justify-content: center;
+              flex-direction: column;
+              align-items: center;
+          }
+
+          .contentBox {
+              background-color: rgba(255, 255, 255, 0.7);
+              padding: 10px;
+              width: 70%;
+              border-radius: 15px;
+              margin: 5px;
+              text-align: center;
+
+          }
+
+          a {
+              text-decoration-color: black;
+              color: black;
+          }
+
+          #overview {
+              display: inline;
+          }
+
+          h2 {
+              text-decoration: underline;
+              font-size: 30px;
+          }
+
+      </style>
+    </head>
+    <body>
+        <div class="contentBox" id="titleContents">
+            <h1><a href="../../../index.html">XOR Encryption</a></h1>
+        </div>
+
+        <div class="contentBox" id="overview">
+            <h2 style="text-align: center;">Overview</h2>
+            <div style="width: 80%; margin: 0 auto;">
+                <p style="text-align: center;">
+                    XOR Encryption (Exclusive OR) is a way of scrambling data. It's symmetric as the same key is used
+                    to encrypt and decrypt the data. It is calculated by calculating the XOR result of the key and the message bits.
+                    A XOR gate's behavior is that it will only output 1 if one of the inputs is 1, but not both, or none. Note that
+                    you can only encrypt/decrypt messages shorter (or the same) length as the key.
+                </p>
+            </div>
+        </div>
+        <div class="contentBox" id="keWords">
+            <h2 style="margin-bottom: 0px">Keywords</h2>
+            <ul style="text-align: left; display: inline-block;list-style-type: none;padding: 0;">
+                <li style="text-align: center">Symmetric</li>
+                <li style="text-align: center">Frequency Analysis (Cracking)</li>
+                <li style="text-align: center">Key Distribution</li>
+                <li style="text-align: center">Secret Key</li>
+            </ul>
+        </div>
+
+        <div class="contentBox" style="padding-bottom: 30px">
+            <h2>Key Generator</h2>
+            <div id="keyGenerator" style="display: inline;">
+                <p style="display: inline;">Bits:</p>
+                <input type="number" value="256" id="keyLength" style="width: 50px;display: inline;">
+                <button style="display: inline;" onclick="generateKey()">Generate</button>
+            </div>
+            <p style="text-align: center;" id="generatedKeyHex"></p>
+        </div>
+
+        <div class="contentBox" style="padding-bottom: 30px">
+            <h2>Encryptor</h2>
+            <div>
+                <input type="text" id="key" placeholder="Key" style="width: 80%;display: inline;">
+                <input type="text" id="binary" placeholder="Binary" style="width: 80%;display: inline;">
+            </div>
+        </div>
+
+        <script>
+            function generateKey() {
+                const keyLength = parseInt(
+                    document.getElementById("keyLength").value
+                );
+
+                var key = "";
+                for (let bit = 0; bit < keyLength / 8; bit++) {
+                    key += Math.floor(Math.random() * 16).toString(16)
+                }
+
+                document.getElementById("generatedKeyHex").innerText = key;
+
+            }
+        </script>
+
+    </body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>Computer Science A-Level Demos</title>
+      <style>
+          body {
+              background-image: url("background.webp");
+              background-repeat: no-repeat;
+              background-size: cover;
+
+              display: flex;
+              justify-content: center;
+              flex-direction: column;
+              align-items: center;
+          }
+
+          .contentBox {
+              background-color: rgba(255, 255, 255, 0.7);
+              padding: 10px;
+              width: 70%;
+              border-radius: 15px;
+              margin: 5px;
+              text-align: center;
+
+          }
+
+          a {
+              text-decoration-color: black;
+              color: black;
+          }
+
+      </style>
+    </head>
+    <body>
+        <div class="contentBox" id="titleContents">
+            <h1 style="text-decoration: underline">Computer Science Demos (A-Level)</h1>
+        </div>
+
+    <script>
+        const projects = [
+            {
+                "title": "XOR Bit Encryption",
+                "description": "Symmetric  XOR Encryption",
+                "category": "encryption",
+                "dirName": "xor",
+            }
+        ];
+
+
+
+
+
+        projects.forEach(function(project) {
+            var projectDiv = document.createElement('div');
+            projectDiv.className = "contentBox";
+
+            var title = document.createElement('h2')
+            var url = "demos/" + project.category + "/" + project.dirName + "/index.html"
+            title.innerHTML = "<a href='" + url + "'>" + project.title + "</a>";
+            projectDiv.appendChild(title)
+
+            var description = document.createElement('p')
+            description.innerText = project.description
+            projectDiv.appendChild(description)
+
+            document.body.appendChild(
+                projectDiv
+            )
+        });
+
+    </script>
+    </body>
+</html>
