@@ -79,9 +79,11 @@
         <div class="contentBox" style="padding-bottom: 30px">
             <h2>Encryptor</h2>
             <div>
-                <input type="text" id="key" placeholder="Key" style="width: 80%;display: inline;">
+                <input type="text" id="key" placeholder="Key (Hex)" style="width: 80%;display: inline;">
                 <input type="text" id="binary" placeholder="Binary" style="width: 80%;display: inline;">
             </div>
+            <div><button onclick="encrypt()">Encrypt</button></div>
+            <p id="encryptedOutput"></p>
         </div>
 
         <script>
@@ -97,6 +99,35 @@
 
                 document.getElementById("generatedKeyHex").innerText = key;
 
+            }
+
+            function encrypt() {
+                const hexKey = document.getElementById("key").value;
+                const binary = document.getElementById("binary").value;
+
+                let key = parseInt(hexKey, 16).toString(2);
+                document.getElementById("encryptedOutput").innerText = encryptAndDecrypt(binary, key);
+            }
+
+
+
+            function encryptAndDecrypt(binary, key) {
+                if (binary.length > key.length) {
+                    return "Too Much Binary For Key";
+                } else {
+                    var output = "";
+
+                    for (let i=0; i<binary.length;i++) {
+                        console.log(binary.charAt(i))
+                        if (binary.charAt(i) === key.charAt(i)) {
+                            output += "0";
+                        } else {
+                            output += "1";
+                        }
+                    }
+
+                    return output
+                }
             }
         </script>
 
