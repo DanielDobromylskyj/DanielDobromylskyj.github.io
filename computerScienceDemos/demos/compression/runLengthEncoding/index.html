@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>Computer Science A-Level Demos</title>
+      <style>
+          body {
+              background-image: url("../../../background.webp");
+              background-repeat: no-repeat;
+              background-size: cover;
+
+              display: flex;
+              justify-content: center;
+              flex-direction: column;
+              align-items: center;
+          }
+
+          .contentBox {
+              background-color: rgba(255, 255, 255, 0.7);
+              padding: 10px;
+              width: 70%;
+              border-radius: 15px;
+              margin: 5px;
+              text-align: center;
+
+          }
+
+          a {
+              text-decoration-color: black;
+              color: black;
+          }
+
+          #overview {
+              display: inline;
+          }
+
+          h2 {
+              text-decoration: underline;
+              font-size: 30px;
+          }
+
+      </style>
+    </head>
+    <body>
+        <div class="contentBox" id="titleContents">
+            <h1><a href="../../../index.html">Run Length Encoding</a></h1>
+        </div>
+
+        <div class="contentBox" id="overview">
+            <h2 style="text-align: center;">Overview</h2>
+            <div style="width: 80%; margin: 0 auto;">
+                <p style="text-align: center;">
+                    Run-Length-Encoding (RLE) is a type of compression that replaces repeated characters / values with a number
+                    saying how many of said value, followed by said value. E.g. "Hello -> 1H1e2l1o" this type of compression is
+                    will normally have a negative impact on the file size of a plain-text file, as there is not many repeated
+                    characters in the english language. This type of encoding can work well for things like images, where the same
+                    colour is repeated many times in a row. A common question could be todo with compressing a DNA sequence like
+                    "AAAAGGGCCCTTTTT", Feel free to encode this if you wish.
+                </p>
+            </div>
+        </div>
+        <div class="contentBox" id="keWords">
+            <h2 style="margin-bottom: 0px">Keywords</h2>
+            <ul style="text-align: left; display: inline-block;list-style-type: none;padding: 0;">
+                <li style="text-align: center">Lossless Compression</li>
+            </ul>
+        </div>
+
+        <div class="contentBox" style="padding-bottom: 30px">
+            <h2>Text Encoding</h2>
+            <div style="display: inline;">
+                <p style="display: inline;">Input:</p>
+                <input type="text" id="inputText" style="width: 250px;display: inline;">
+                <button style="display: inline;" onclick="EncodeText()">Encode</button>
+            </div>
+            <p style="text-align: center;" id="outputText"></p>
+            <p style="text-align: center;" id="textCompressionRatio"></p>
+        </div>
+
+
+        <script>
+            function EncodeText() {
+                let uncoded = document.getElementById("inputText").value;
+
+                let encoded = "";
+                for (let i = 0, len = uncoded.length; i < len; i++) {
+                    let count = 1;
+                    let chr = uncoded.charAt(i);
+
+                    while (true) {
+                        if (uncoded.charAt(i + count) === chr) {
+                            count++;
+                        } else {
+                            break
+                        }
+                    }
+                    
+                    i += count-1;
+
+                    encoded += count.toString() + chr
+                }
+
+                const ratio = Math.round((encoded.length / uncoded.length) * 100)
+
+                let goodOrBad = "(Good)";
+                if (ratio >= 100) {
+                    goodOrBad = "(Bad)"
+                }
+
+                document.getElementById("outputText").innerText = "Encoded: " + encoded;
+                document.getElementById("textCompressionRatio").innerText = "Compression Ratio: " + ratio.toString() + "% " + goodOrBad
+            }
+        </script>
+
+    </body>
+</html>
