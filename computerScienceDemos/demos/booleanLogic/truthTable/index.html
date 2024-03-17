@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>Computer Science A-Level Demos</title>
+      <style>
+          body {
+              background-image: url("../../../background.webp");
+              background-repeat: no-repeat;
+              background-size: cover;
+
+              display: flex;
+              justify-content: center;
+              flex-direction: column;
+              align-items: center;
+          }
+
+          .contentBox {
+              background-color: rgba(255, 255, 255, 0.7);
+              padding: 10px;
+              width: 70%;
+              border-radius: 15px;
+              margin: 5px;
+              text-align: center;
+
+              display: flex;
+              justify-content: center;
+              flex-direction: column;
+              align-items: center;
+
+          }
+
+          a {
+              text-decoration-color: black;
+              color: black;
+          }
+
+          #overview {
+              display: inline;
+          }
+
+          h2 {
+              text-decoration: underline;
+              font-size: 30px;
+          }
+
+          table {
+            border-collapse: collapse;
+            width: 95%;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+
+
+      </style>
+    </head>
+    <body>
+        <div class="contentBox" id="titleContents">
+            <h1><a href="../../../index.html">Truth Tables</a></h1>
+        </div>
+
+        <div class="contentBox" id="overview">
+            <h2 style="text-align: center;">Overview</h2>
+            <div style="width: 80%; margin: 0 auto;">
+                <p style="text-align: center;">
+                    A Boolean Logic Truth Table is a table that shows every output given every input.
+                </p>
+            </div>
+        </div>
+        <div class="contentBox" id="keWords">
+            <h2 style="margin-bottom: 0px">Keywords</h2>
+            <ul style="text-align: left; display: inline-block;list-style-type: none;padding: 0;">
+                <li style="text-align: center">Binary</li>
+            </ul>
+        </div>
+
+        <div class="contentBox" style="padding-bottom: 30px">
+            <h2>Truth Table Generator</h2>
+            <p style="margin: 10px">Valid Operators: AND/NAND/OR/NOR/XOR/NOT. E.g. "A = B OR (NOT C)"</p>
+            <p style="margin: 10px">Everything must be seperated by a space (except brackets and their content).</p>
+            <p style="margin: 10px">You can have multiple outputs by separating them with a semicolon ";"</p>
+            <div style="display: inline;">
+                <p style="display: inline;">Logic Statement:</p>
+                <input type="text" id="inputText" style="width: 250px;display: inline;">
+                <button style="display: inline;" onclick="CreateTruthTable()">Create</button>
+            </div>
+        </div>
+
+        <div class="contentBox" id="truthTableContainer">
+            <table id="truthTable"></table>
+        </div>
+
+
+
+
+        <script>
+            function CreateTruthTable() {
+                const logicStatement = document.getElementById("inputText").value;
+                const logicStatements = logicStatement.split(";")
+                document.getElementById("truthTable").innerHTML = "";
+
+                // Calculate
+                let InOutNodes = getVariables(logicStatement);
+                let Nodes = separateNodeTypes(InOutNodes)
+
+                let table = traceLogic(logicStatements, Nodes["Inputs"]);
+
+                // Display
+                displayTruthTable(table, Nodes["Inputs"], Nodes["Outputs"]);
+                document.getElementById("truthTableContainer").hidden = false;
+
+            }
+
+            function displayTruthTable(truthTable, inputs, outputs) {
+                const table = document.getElementById('truthTable');
+                table.innerHTML = ''; // Clear existing table content
+
+                const headerRow = table.insertRow();
+
+                // Add input column headers
+                inputs.forEach(input => {
+                    const headerCell = headerRow.insertCell();
+                    headerCell.textContent = input;
+                });
+
+                // Add output column headers
+                outputs.forEach(output => {
+                    const headerCell = headerRow.insertCell();
+                    headerCell.textContent = output;
+                });
+
+                // Add rows with truth table data
+                truthTable.forEach(rowData => {
+                    const row = table.insertRow();
+                    inputs.forEach(input => {
+                        const cell = row.insertCell();
+                        cell.textContent = rowData[input] ? '1' : '0';
+                    });
+                    outputs.forEach(output => {
+                        const cell = row.insertCell();
+                        cell.textContent = rowData[output] ? '1' : '0';
+                    });
+                });
+            }
+
+
+            function separateNodeTypes(nodes) {
+                let In = [];
+                let Out = [];
+
+                Object.keys(nodes).forEach(key => {
+                    if (nodes[key]) {
+                        In.push(key);
+                    } else {
+                        Out.push(key);
+                    }
+                });
+
+                return {
+                    "Inputs": In,
+                    "Outputs": Out
+                };
+
+            }
+
+            function getVariables(statement) {
+                const ValidOperators = ["OR", "NOR", "XOR", "AND", "NAND", "NOT"]
+                let vars = {};
+                let InvalidStatement = false;
+
+                statement.split(";").forEach(function(subStatement) {
+                    let isInput = false;
+                    subStatement.split(" ").forEach(function(segment) {
+                        segment = segment.replace("(", "").replace(")", "")
+
+                        if (segment !== "") {
+                            if (segment === "=") {
+                                isInput = true;
+                            } else if (!(ValidOperators.includes(segment))) {
+                                if (vars[segment] === false) {
+                                    alert("You can not include A Input As An Output Or Vis-Versa.")
+                                    console.error("Invalid logic statement");
+                                    InvalidStatement = true;
+                                }
+                                vars[segment] = isInput;
+                            }
+                        }
+                    });
+                })
+
+                if (InvalidStatement) {
+                    return {};
+                }
+
+                return vars;
+            }
+
+
+            function traceLogic(logicStatements, inputs) {
+                const inputCombinations = [];
+                for (let i = 0; i < Math.pow(2, inputs.length); i++) {
+                    const inputValues = {};
+                    inputs.forEach((input, index) => {
+                        inputValues[input] = !!(i & (1 << index));
+                    });
+                    inputCombinations.push(inputValues);
+                }
+
+                // Create the truth table
+                return inputCombinations.map(inputValues => {
+                    const outputValues = {};
+                    logicStatements.forEach(statement => {
+                        const [output, logic] = statement.split(" = ");
+                        outputValues[output] = evaluateLogicStatement(inputs, logic, inputValues);
+                    });
+                    return {...inputValues, ...outputValues};
+                });
+            }
+
+
+            function evaluateLogicStatement(inputs, statement, inputValues) {
+                let evaluatedStatement = statement;
+                inputs.forEach((input, index) => {
+                    evaluatedStatement = evaluatedStatement.replace(new RegExp(input, 'g'), inputValues[input] ? '1' : '0');
+                });
+                evaluatedStatement = evaluatedStatement.replace(/NOT /g, '!');
+
+                // Convert logical operators to JavaScript equivalents
+                evaluatedStatement = evaluatedStatement.replace(/\bAND\b/g, '&&');
+                evaluatedStatement = evaluatedStatement.replace(/\bOR\b/g, '||');
+                evaluatedStatement = evaluatedStatement.replace(/\bXOR\b/g, '^');
+                evaluatedStatement = evaluatedStatement.replace(/\bNAND\b/g, '!(');
+                evaluatedStatement = evaluatedStatement.replace(/\bNOR\b/g, '!(');
+                evaluatedStatement = evaluatedStatement.replace(/\bXNOR\b/g, '!^');
+
+                // Evaluate the expression and return the result
+                return +eval(evaluatedStatement);
+            }
+
+
+
+        </script>
+
+    </body>
+</html>
