@@ -81,6 +81,18 @@
             <p style="text-align: center;" id="textCompressionRatio"></p>
         </div>
 
+        <div class="contentBox" style="padding-bottom: 30px">
+            <h2>Dictionary Decoding</h2>
+            <div style="display: inline;">
+                    <p style="display: inline;">Dictionary:</p>
+                <input type="text" id="dictionaryIn" style="width: 250px;display: inline;">
+                <br><p style="display: inline;">Encoded:</p>
+                <input type="text" id="encodedIn" style="width: 250px;display: inline;">
+                <br><button style="display: inline;" onclick="DecodeText()">Decode</button>
+            </div>
+            <p style="text-align: center;" id="decodedText"></p>
+        </div>
+
 
 
         <script>
@@ -93,6 +105,11 @@
 
                 for (let i = 0; i < words.length; i++) {
                     let word = words[i];
+
+                    if (i !== 0) {
+                        word = " " + word
+                    }
+
                     let index = dictionary.indexOf(word);
 
                     if (index === -1) {
@@ -119,6 +136,20 @@
                 document.getElementById("outputDict").innerText = "Dictionary: " + stringDict;
                 document.getElementById("textCompressionRatio").innerText = "Compression Ratio: " + ratio.toString() + "% " + goodOrBad
             }
+
+            function DecodeText() {
+                let encoded = document.getElementById("encodedIn").value.split(" ");
+                let dict = document.getElementById("dictionaryIn").value.split(",");
+
+                let uncoded = "";
+
+                encoded.forEach(function(value) {
+                    uncoded += dict[parseInt(value)];
+                })
+
+                document.getElementById("decodedText").innerText = "Decoded: " + uncoded
+            }
+
 
         </script>
 
