@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>Computer Science A-Level Demos</title>
+      <style>
+          body {
+              background-image: url("../../../background.webp");
+              background-repeat: no-repeat;
+              background-size: cover;
+
+              display: flex;
+              justify-content: center;
+              flex-direction: column;
+              align-items: center;
+          }
+
+          .contentBox {
+              background-color: rgba(255, 255, 255, 0.7);
+              padding: 10px;
+              width: 70%;
+              border-radius: 15px;
+              margin: 5px;
+              text-align: center;
+
+          }
+
+          a {
+              text-decoration-color: black;
+              color: black;
+          }
+
+          #overview {
+              display: inline;
+          }
+
+          h2 {
+              text-decoration: underline;
+              font-size: 30px;
+          }
+
+      </style>
+    </head>
+    <body>
+        <div class="contentBox" id="titleContents">
+            <h1><a href="../../../index.html">Hashing </a></h1>
+        </div>
+
+        <div class="contentBox" id="overview">
+            <h2 style="text-align: center;">Overview</h2>
+            <div style="width: 80%; margin: 0 auto;">
+                <p style="text-align: center;">
+                    Hashing is a one-way function that given an input will create a unique output.
+                    This output is consistent, given the same input, you get the same output.
+                    A Hashing function has a collision rate, The collision rate of a given hashing function
+                    is the chance that two different inputs give the same output.
+                </p>
+            </div>
+        </div>
+        <div class="contentBox" id="keWords">
+            <h2 style="margin-bottom: 0px">Keywords</h2>
+            <ul style="text-align: left; display: inline-block;list-style-type: none;padding: 0;">
+                <li style="text-align: center">One-way</li>
+                <li style="text-align: center">Collision Rate</li>
+                <li style="text-align: center">Unique Output</li>
+            </ul>
+        </div>
+
+        <div class="contentBox" style="padding-bottom: 30px">
+            <h2>Hashing</h2>
+            <div id="keyGenerator" style="display: inline;">
+                <p style="display: inline;">Input:</p>
+                <input type="text" id="inputText" style="width: 250px;display: inline;">
+                <button style="display: inline;" onclick="hashInput()">Hash</button>
+            </div>
+            <p style="text-align: center;" id="outputText"></p>
+        </div>
+
+
+        <script>
+            function hashInput() {
+                let str = document.getElementById("inputText").value;
+
+                let hash = 0;
+                for (let i = 0, len = str.length; i < len; i++) {
+                    let chr = str.charCodeAt(i);
+                    hash = (hash << 5) - hash + chr;
+                    hash |= 0;
+                }
+
+                document.getElementById("outputText").innerText = Math.abs(hash).toString(16);
+            }
+        </script>
+
+    </body>
+</html>

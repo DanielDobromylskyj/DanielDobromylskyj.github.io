@@ -29,6 +29,18 @@
               color: black;
           }
 
+          #projects {
+              margin: 0;
+              border: 0;
+              padding: 0;
+              width: 100%;
+
+              display: flex;
+              justify-content: center;
+              flex-direction: column;
+              align-items: center;
+          }
+
       </style>
     </head>
     <body>
@@ -36,37 +48,92 @@
             <h1 style="text-decoration: underline">Computer Science Demos (A-Level)</h1>
         </div>
 
+        <div class="searchBox contentBox">
+            <input type="text" id="searchInput" placeholder="Search by title" onkeydown="handleKeyPress(event)">
+            <button onclick="searchProjects()">Search</button>
+        </div>
+
+        <div id="projects"></div>
+
     <script>
         const projects = [
             {
                 "title": "XOR Bit Encryption",
-                "description": "Symmetric  XOR Encryption",
+                "description": "Symmetric XOR Encryption",
                 "category": "encryption",
                 "dirName": "xor",
+            },
+            {
+                "title": "Hashing",
+                "description": "Simple Hashing Functions",
+                "category": "encryption",
+                "dirName": "hashing",
+            },
+
+
+            {
+                "title": "Run Length Encoding (RLE)",
+                "description": "A Simple Implementation Of RLE",
+                "category": "compression",
+                "dirName": "runLengthEncoding",
+            },
+            {
+                "title": "Dictionary Encoding",
+                "description": "A Simple Implementation Of Dictionary Encoding",
+                "category": "compression",
+                "dirName": "dictionaryEncoding",
+            },
+
+            {
+                "title": "Boolean Logic Truth Tables",
+                "description": "Automatically create a truth table of your logic.",
+                "category": "booleanLogic",
+                "dirName": "truthTable",
             }
         ];
 
 
 
 
+        function displayProjects(projects) {
+            document.getElementById("projects").innerHTML = "";
 
-        projects.forEach(function(project) {
-            var projectDiv = document.createElement('div');
-            projectDiv.className = "contentBox";
+            projects.forEach(function (project) {
+                var projectDiv = document.createElement('div');
+                projectDiv.className = "contentBox";
 
-            var title = document.createElement('h2')
-            var url = "demos/" + project.category + "/" + project.dirName + "/index.html"
-            title.innerHTML = "<a href='" + url + "'>" + project.title + "</a>";
-            projectDiv.appendChild(title)
+                var title = document.createElement('h2')
+                var url = "demos/" + project.category + "/" + project.dirName + "/index.html"
+                title.innerHTML = "<a href='" + url + "'>" + project.title + "</a>";
+                projectDiv.appendChild(title)
 
-            var description = document.createElement('p')
-            description.innerText = project.description
-            projectDiv.appendChild(description)
+                var description = document.createElement('p')
+                description.innerText = project.description
+                projectDiv.appendChild(description)
 
-            document.body.appendChild(
-                projectDiv
-            )
-        });
+                document.getElementById("projects").appendChild(
+                    projectDiv
+                )
+            });
+        }
+
+        displayProjects(projects);
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                searchProjects();
+            }
+        }
+
+
+        function searchProjects() {
+            const searchInput = document.getElementById('searchInput').value.toLowerCase();
+            const filteredProjects = projects.filter(function (project) {
+                return project.title.toLowerCase().includes(searchInput);
+            });
+
+            displayProjects(filteredProjects);
+        }
 
     </script>
     </body>

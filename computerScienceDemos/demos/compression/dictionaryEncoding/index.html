@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>Computer Science A-Level Demos</title>
+      <style>
+          body {
+              background-image: url("../../../background.webp");
+              background-repeat: no-repeat;
+              background-size: cover;
+
+              display: flex;
+              justify-content: center;
+              flex-direction: column;
+              align-items: center;
+          }
+
+          .contentBox {
+              background-color: rgba(255, 255, 255, 0.7);
+              padding: 10px;
+              width: 70%;
+              border-radius: 15px;
+              margin: 5px;
+              text-align: center;
+
+          }
+
+          a {
+              text-decoration-color: black;
+              color: black;
+          }
+
+          #overview {
+              display: inline;
+          }
+
+          h2 {
+              text-decoration: underline;
+              font-size: 30px;
+          }
+
+      </style>
+    </head>
+    <body>
+        <div class="contentBox" id="titleContents">
+            <h1><a href="../../../index.html">Dictionary Encoding</a></h1>
+        </div>
+
+        <div class="contentBox" id="overview">
+            <h2 style="text-align: center;">Overview</h2>
+            <div style="width: 80%; margin: 0 auto;">
+                <p style="text-align: center;">
+                    Dictionary Encoding is a compression technique that replaces repeated sequences of data with references to a dictionary.
+                    Instead of storing redundant information multiple times, it stores the data once and then references it whenever the
+                    same sequence occurs again. For instance, let's say we have the following text: "apple apple banana banana cherry".
+                    With dictionary encoding, we would create a dictionary containing unique words: ["apple", "banana", "cherry"].
+                    Then, we replace each occurrence of a word with its index in the dictionary. So, the encoded version would
+                    be something like: "0 0 1 1 2".
+                </p>
+            </div>
+        </div>
+        <div class="contentBox" id="keWords">
+            <h2 style="margin-bottom: 0px">Keywords</h2>
+            <ul style="text-align: left; display: inline-block;list-style-type: none;padding: 0;">
+                <li style="text-align: center">Lossless Compression</li>
+                <li style="text-align: center">Dictionary</li>
+                <li style="text-align: center">Encoding</li>
+
+            </ul>
+        </div>
+
+        <div class="contentBox" style="padding-bottom: 30px">
+            <h2>Basic Text Encoding</h2>
+            <p>This algorithm is not designed to be the most efficient, but simple to make. Simply split into words (at spaces) and store each word in dict</p>
+            <div style="display: inline;">
+                <p style="display: inline;">Input:</p>
+                <input type="text" id="inputText" style="width: 250px;display: inline;">
+                <button style="display: inline;" onclick="EncodeText()">Encode</button>
+            </div>
+            <p style="text-align: center;" id="outputDict"></p>
+            <p style="text-align: center;" id="outputText"></p>
+            <p style="text-align: center;" id="textCompressionRatio"></p>
+        </div>
+
+        <div class="contentBox" style="padding-bottom: 30px">
+            <h2>Dictionary Decoding</h2>
+            <div style="display: inline;">
+                    <p style="display: inline;">Dictionary:</p>
+                <input type="text" id="dictionaryIn" style="width: 250px;display: inline;">
+                <br><p style="display: inline;">Encoded:</p>
+                <input type="text" id="encodedIn" style="width: 250px;display: inline;">
+                <br><button style="display: inline;" onclick="DecodeText()">Decode</button>
+            </div>
+            <p style="text-align: center;" id="decodedText"></p>
+        </div>
+
+
+
+        <script>
+            function EncodeText() {
+                let uncoded = document.getElementById("inputText").value;
+                let encoded = "";
+                let dictionary = [];
+
+                let words = uncoded.split(" ");
+
+                for (let i = 0; i < words.length; i++) {
+                    let word = words[i];
+
+                    if (i !== 0) {
+                        word = " " + word
+                    }
+
+                    let index = dictionary.indexOf(word);
+
+                    if (index === -1) {
+                        dictionary.push(word);
+                        index = dictionary.length - 1;
+                    }
+
+                    encoded += index.toString() + " ";
+                }
+
+                encoded = encoded.trim()
+
+                let stringDict = dictionary.shift()
+                dictionary.forEach(function (item) {
+                    stringDict += "," + item
+                })
+
+                const ratio = Math.round(((encoded.length + stringDict.length)  / uncoded.length) * 100)
+
+                let goodOrBad = "(Good)";
+                if (ratio >= 100) {goodOrBad = "(Bad)"}
+
+                document.getElementById("outputText").innerText = "Encoded: " + encoded;
+                document.getElementById("outputDict").innerText = "Dictionary: " + stringDict;
+                document.getElementById("textCompressionRatio").innerText = "Compression Ratio: " + ratio.toString() + "% " + goodOrBad
+            }
+
+            function DecodeText() {
+                let encoded = document.getElementById("encodedIn").value.split(" ");
+                let dict = document.getElementById("dictionaryIn").value.split(",");
+
+                let uncoded = "";
+
+                encoded.forEach(function(value) {
+                    uncoded += dict[parseInt(value)];
+                })
+
+                document.getElementById("decodedText").innerText = "Decoded: " + uncoded
+            }
+
+
+        </script>
+
+    </body>
+</html>

@@ -77,13 +77,31 @@
         </div>
 
         <div class="contentBox" style="padding-bottom: 30px">
-            <h2>Encryptor</h2>
+            <h2>Encrypter / Decrypter</h2>
             <div>
+<<<<<<< HEAD
                 <input type="text" id="key" placeholder="Key (Hex)" style="width: 80%;display: inline;">
                 <input type="text" id="binary" placeholder="Binary" style="width: 80%;display: inline;">
+=======
+                <input type="text" id="key" placeholder="Your Key (hex)" style="width: 80%;display: inline;">
+                <input type="text" id="message" placeholder="Message" style="width: 80%;display: inline;">
+                <button style="width: 20%;display: inline;" onclick="encrypt()">Encrypt / Decrypt</button>
+>>>>>>> ca5ec2967a822f6fc1fe33e3b25c82439a7e56a5
             </div>
             <div><button onclick="encrypt()">Encrypt</button></div>
             <p id="encryptedOutput"></p>
+        </div>
+
+        <div class="contentBox" id="visOutputContainer" hidden="hidden">
+            <h2>Visualized</h2>
+            <div id="visOutput" style="display: flex;justify-content: center; align-items: center"></div>
+        </div>
+
+        <div class="contentBox" id="OutputContainer" hidden="hidden">
+            <h2>Output (Plain Text)</h2>
+            <p>Don't expect this to be readable</p>
+
+            <p id="outputText"></p>
         </div>
 
         <script>
@@ -98,9 +116,56 @@
                 }
 
                 document.getElementById("generatedKeyHex").innerText = key;
+            }
+
+            function bitsToString(bits) {
+                let bytes = [];
+                for (let i = 0; i < bits.length; i += 8) {
+                    bytes.push(bits.slice(i, i + 8));
+                }
+
+                let characters = bytes.map(byte => String.fromCharCode(parseInt(byte, 2)));
+
+                return characters.join('');
+            }
+
+            function encrypt() {
+                let encryptionKey = parseInt(document.getElementById("key").value, 16);
+                let keyBits = encryptionKey.toString(2).split("");
+
+                let message = document.getElementById("message").value;
+                let characters = message.split("");
+                let messageBits = [];
+
+                characters.forEach(character => {
+                    let characterByte = "0" + character.charCodeAt(0).toString(2);
+                    characterByte.split("").forEach(function (bit) {
+                        messageBits.push(bit);
+                    })
+                });
+
+                document.getElementById("visOutputContainer").hidden = false;
+                document.getElementById("OutputContainer").hidden = false;
+
+                if (messageBits.length > keyBits.length) {
+                    document.getElementById("outputText").innerText = 'Key Too Small For Message';
+                }
+
+                let xorData = [];
+                let i = 0;
+                messageBits.forEach(function(bit) {
+                    xorData.push((parseInt(bit) ^ parseInt(keyBits[i])).toString());
+                    i++;
+                })
+
+
+                createTable(messageBits, keyBits, xorData)
+
+                document.getElementById("outputText").innerText = bitsToString(xorData)
 
             }
 
+<<<<<<< HEAD
             function encrypt() {
                 const hexKey = document.getElementById("key").value;
                 const binary = document.getElementById("binary").value;
@@ -129,6 +194,41 @@
                     return output
                 }
             }
+=======
+            function createTable(inData, keyData, xorData) {
+                let tableHTML = '<table border="1">';
+
+                let maxElementsWritable = document.getElementById('visOutput').offsetWidth / 18
+
+                let numberOfValuesToDisplay = Math.min(Math.min(inData.length, keyData.length, xorData.length), maxElementsWritable);
+
+                tableHTML += '<tr>';
+                tableHTML += '<td>In</td>';
+                for (let i = 0; i < numberOfValuesToDisplay; i++) {
+                    tableHTML += '<td>' + inData[i].toString() + '</td>';
+                }
+                tableHTML += '</tr>';
+
+                tableHTML += '<tr>';
+                tableHTML += '<td>Key</td>';
+                for (let i = 0; i < numberOfValuesToDisplay; i++) {
+                    tableHTML += '<td>' + keyData[i].toString() + '</td>';
+                }
+                tableHTML += '</tr>';
+
+                tableHTML += '<tr>';
+                tableHTML += '<td>XOR</td>';
+                for (let i = 0; i < numberOfValuesToDisplay; i++) {
+                    tableHTML += '<td>' + xorData[i].toString() + '</td>';
+                }
+                tableHTML += '</tr>';
+
+                tableHTML += '</table>';
+
+                document.getElementById('visOutput').innerHTML = tableHTML;
+            }
+
+>>>>>>> ca5ec2967a822f6fc1fe33e3b25c82439a7e56a5
         </script>
 
     </body>
