@@ -1,0 +1,595 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: "Inter", sans-serif;
+  background-color: #121e26;
+}
+
+#particles-js {
+  position: fixed;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #121e26;
+  z-index: 0;
+}
+
+.centre-text {
+  width: 100%;
+  max-width: 600px;
+  align-items: center;
+  text-align: center;
+  color: #ffffff;
+  position: fixed;
+  margin: 0%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.page-wrapper {
+  position: relative;
+  z-index: 1;
+  max-width: 620px;
+  margin: 0 auto;
+  padding: 20px;
+  z-index: 100;
+  color: #ffffff;
+}
+
+.page-wrapper-a4 {
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  position: relative;
+  z-index: 1;
+  max-width: 826px;
+  margin: 0 auto;
+  padding: 20px;
+  z-index: 100;
+  color: #ffffff;
+  border: 1px solid white;
+}
+
+/* Full-Width Header */
+.menu-container {
+  background-color: #121e26;
+  color: white;
+  padding: 10px 0;
+  width: 100%;
+  position: relative;
+}
+
+#menu-usericon {
+  border-color: transparent;
+}
+
+.menu-header {
+  max-width: 620px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+
+
+.logo {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.menu-icons {
+  display: flex;
+  align-items: center;
+}
+
+.btn {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 14px;
+  margin-left: 10px;
+  cursor: pointer;
+  padding: 5px 10px;
+}
+
+.btn:hover {
+  background-color: #3b4a54;
+}
+
+
+.report-btn {
+  border: 1px solid white;
+  border-radius: 5px;
+}
+
+.btn-profile {
+  border-radius: 55%;
+  /* Adjust to 55% for 10% larger than typical circle */
+  width: 35px;
+  /* Adjust size for a circle */
+  height: 35px;
+  /* Same as width to maintain the circle */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: auto;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  z-index: 5;
+}
+
+.settings-btn {
+  border: 1px solid white;
+  border-radius: 5px;
+}
+
+/* Dropdown Content */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: #ffffff;
+  color: #333;
+  min-width: 150px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 6;
+  border-radius: 4px;
+}
+
+.dropdown-content a {
+  color: #333;
+  padding: 10px 15px;
+  text-decoration: none;
+  display: block;
+  font-size: 14px;
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+.dropdown-content .delete {
+  color: red;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.content-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  width: 100%;
+}
+
+main {
+  text-align: center;
+  padding: 20px;
+}
+
+#gapFillHolder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  padding: 20px;
+  animation: fadeIn 1s ease-in-out;
+}
+
+#gapFillText {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #ffffff;
+  text-align: center;
+}
+
+.blank {
+  color: #ffffff;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+#inputContainer {
+  position: fixed;
+  bottom: 10%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#answerInput {
+  width: 50%;
+  padding: 10px;
+  font-size: 1.2rem;
+  border: 2px solid #ffffff;
+  border-radius: 5px;
+  animation: bounceIn 0.5s ease;
+}
+
+#feedback {
+  margin-top: 20px;
+  font-size: 1.2rem;
+  text-align: center;
+  font-weight: bold;
+  animation: none;
+}
+
+#text,
+#privacy-policy {
+  position: relative;
+  z-index: 1;
+  /* Ensure text is above particles */
+  max-width: 620px;
+  margin: auto;
+  padding: 20px;
+  color: white;
+  text-align: left;
+  /* Center text for aesthetics */
+}
+
+#text h1,
+#privacy-policy h2 {
+  margin: 0;
+}
+
+.sign-up {
+  width: 100%;
+  max-width: 500px;
+  /* Set a max-width to avoid it stretching too much */
+  height: auto;
+  /* Fixed height for the flashcard */
+  backdrop-filter: blur(16px) saturate(110%);
+  -webkit-backdrop-filter: blur(16px) saturate(110%);
+  border: 1px solid rgba(255, 255, 255, 0.125);
+  border-radius: 6px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+
+  position: fixed;
+  /* Use absolute positioning */
+  top: 50%;
+  /* Move to the middle vertically */
+  left: 50%;
+  /* Move to the middle horizontally */
+  transform: translate(-50%, -50%);
+}
+
+/* Centering the title */
+#sign-up h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+.sign-up #alreadyaccount {
+  font-size: 10px;
+  margin-bottom: 1px;
+  color: #ddd;
+  text-decoration: none;
+  text-align: left;
+  margin: 5px;
+}
+
+#sign-up label {
+  text-align: left;
+}
+
+#sign-up a {
+  margin-bottom: 1px;
+  color: #a6a5a5;
+  text-decoration: none;
+  text-align: left;
+}
+
+/* Form styling */
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+form label {
+  font-size: 14px;
+  margin-bottom: 1px;
+  color: #ddd;
+  text-align: left;
+}
+
+form input {
+  padding: 10px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  border: none;
+  border-bottom: 2px solid #ffffff;
+  background-color: transparent;
+  color: #ffffff;
+}
+
+form input::placeholder {
+  color: #ffffff;
+}
+
+button {
+  padding: 10px;
+  background-color: #7ba9b8;
+  border: none;
+  border-radius: 5px;
+  color: #ffffff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+form button:hover {
+  background-color: #3b4a54;
+  /* Darker blue on hover */
+}
+
+#half-page {
+  position: fixed;
+  margin: 0;
+  width: 35%;
+  height: 100%;
+  background-color: #121e26;
+  z-index: 1.2;
+}
+
+.deck-gridlayout {
+  display: grid;
+  grid-template-columns: auto auto;
+  background-color: transparent;
+}
+
+.grid-item {
+  background-size: cover; /* Ensures the image covers the entire container */
+  background-position: center; /* Centers the image */
+  background-repeat: no-repeat;
+  position: relative;
+  width: auto;
+  height: 100px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 32px;
+  color: #fff; /* Change text color to white to stand out against darker backgrounds */
+  margin: 2.5px;
+  border: 2px solid #121e26;
+  text-shadow: #121e26 1px 0 10px;
+
+  /* Start off-screen (below the viewport) */
+  transform: translateY(100px);
+  opacity: 0; /* Make it invisible initially */
+  transition: transform 0.5s ease-out, opacity 0.5s ease-out; /* Smooth transition for transform and opacity */
+}
+
+.grid-item.show {
+  transform: translateY(0); /* Move the item up to its normal position */
+  opacity: 1; /* Make the item visible */
+}
+
+
+.shuffle-item {
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.125);
+  position: relative;
+  width: auto;
+  height: 100px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 32px;
+  color: #ffffff;
+  /* Adjusted for better readability */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin: 2.5px;
+  text-shadow: rgba(0, 0, 0, 0.3) 1px 0 10px;
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="32" width="32"><text x="0" y="20" font-size="20">🚀 </text></svg>') 16 16, auto;
+}
+
+.shuffle-item p {
+  background: linear-gradient(90deg, #a6c0fe 0%, #f68084 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+
+
+
+
+.grid-item:hover {
+  transform: translateY(-10px);
+  /* Elevates the card on hover */
+}
+
+.shuffle-item:hover {
+  transform: translateY(-10px);
+  /* Elevates the card on hover */
+}
+
+.card-number {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background-color: #121e26;
+  color: white;
+
+  /* Dynamically adjust font size but ensure padding */
+  font-size: clamp(5px, 0.6em, 16px);
+
+  width: 30px;
+  height: 30px;
+
+  border: 2px solid #7ba9b8;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Add some padding around the text */
+  padding: 2px;
+  box-sizing: border-box;
+}
+
+.icontext {
+  display: flex;
+  /* Make the icon and h3 appear on the same line */
+  align-items: center;
+  /* Vertically center the icon and text */
+  gap: 10px;
+  /* Adds space between the icon and text */
+}
+
+
+.card-title {
+  position: absolute;
+  top: 10px;
+  /* Move the title to the top */
+  left: 10px;
+  /* Align it to the left */
+  background-color: transparent;
+  color: white;
+
+  font-size: 14px;
+  width: 75%;
+  height: 25%;
+  border-radius: 50%;
+  display: block;
+  align-items: center;
+  justify-content: center;
+}
+
+.question-content-flashcard {
+  width: 100%;
+  max-width: 600px;
+  /* Set a max-width to avoid it stretching too much */
+  height: 300px;
+  /* Fixed height for the flashcard */
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.125);
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+
+  position: fixed;
+  /* Use absolute positioning */
+  top: 50%;
+  /* Move to the middle vertically */
+  left: 50%;
+  /* Move to the middle horizontally */
+  transform: translate(-50%, -50%);
+  /* Adjust by half of the width and height to center it */
+}
+
+.progress-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  /* Adjust width as needed */
+  max-width: 600px;
+}
+
+.progress-bar {
+  flex: 1;
+  height: 6px;
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.125);
+  border-radius: 3px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.progress-bar-fill {
+  height: 100%;
+  width: 10%;
+  /* Update percentage here */
+  background-color: #ffffff;
+  /* Bar color */
+  border-radius: 3px;
+  transition: width 0.3s ease-in-out;
+}
+
+.progress-text {
+  margin-left: 10px;
+  font-size: 14px;
+  color: #6c757d;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    transform: scale(0.9);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 600px) {
+  #sign-up {
+    max-width: 90%;
+    padding: 20px;
+  }
+
+  form input,
+  form button {
+    font-size: 12px;
+  }
+}
