@@ -593,3 +593,87 @@ form button:hover {
     font-size: 12px;
   }
 }
+
+
+.title-div {
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.8);
+  width: 80%; /* Give some space each side */
+  border-radius: 5px;
+  margin: 0 auto;
+}
+
+.project-title {
+    /* We Love Standards */
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
+
+  color: white;
+}
+
+#all-projects {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Adjust columns dynamically */
+  gap: 10px; /* Space between grid items */
+  justify-content: center; /* Center grid items horizontally */
+  margin: 20px auto; /* Center the grid */
+}
+
+.project-div {
+  width: 200px;
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+  border: 1px solid #ccc;
+  /* margin: 10px; */
+  justify-content: center;
+
+  border: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+
+    transition: transform 0.2s ease-in-out;
+}
+
+
+.project-div:hover {
+  transform: translateY(-8px);
+}
+
+/* Optional: Set a max-width on larger screens to cap the number of columns */
+@media (max-width: 1200px) {
+  #all-projects {
+    grid-template-columns: repeat(4, 1fr); /* 4 columns max */
+  }
+}
+
+@media (max-width: 900px) {
+  #all-projects {
+    grid-template-columns: repeat(3, 1fr); /* 3 columns max */
+  }
+}
+
+@media (max-width: 600px) {
+  #all-projects {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns max */
+  }
+}
+
+@media (max-width: 400px) {
+  #all-projects {
+    grid-template-columns: 1fr; /* 1 column max on very small screens */
+  }
+}
+
+.fly-in {
+  opacity: 0; /* Start invisible */
+  transform: translateY(100px); /* Start below the screen */
+  transition: opacity 300ms ease-out, transform 300ms ease-out; /* Smooth transition for opacity and movement */
+}
+
+
+.fly-in-active {
+  opacity: 1; /* Make the div visible */
+  transform: translateY(0); /* Move the div up to its final position */
+}

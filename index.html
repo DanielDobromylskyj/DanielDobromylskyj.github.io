@@ -15,6 +15,80 @@
         <!-- Full-Width Header -->
         <div id="particles-js"></div>
 
+        <div class="page-wrapper" style="width: 100vw">
+
+            <div style="text-align: center; margin-bottom: 100px;">
+                <h1>My Projects</h1>
+            </div>
+
+            <div id="all-projects"></div>
+        </div>
+
+        <script>
+            const all_projects_div = document.getElementById("all-projects");
+
+            const projects = [
+                {
+                    "name": "Find-A-Bac (A-Level)",
+                    "href": "projects/findabac.html",
+                    "image_path": "assets/imgs/findabac/preview.png"
+                },{
+                    "name": "UTCN Table Booking",
+                    "href": "projects/tablebooking.html",
+                    "image_path": "assets/imgs/tablebooking/preview.png"
+                },{
+                    "name": "Custom Keyboard & Controller",
+                    "href": "projects/keyboardcontroller.html",
+                    "image_path": "assets/imgs/keyboardcontroller/preview.png"
+                },{
+                    "name": "Sunkenland ModManager",
+                    "href": "projects/sunkenlandmodmanager.html",
+                    "image_path": "assets/imgs/sunkenlandmodmanager/preview.png"
+                }
+
+            ]
+
+            function relocate(event) {
+                window.location.href = event.currentTarget.getAttribute("href");
+            }
+
+            function render_project(project) {
+                const project_div = document.createElement("div");
+                project_div.className = "project-div";
+                project_div.classList.add("fly-in");
+                project_div.style.backgroundImage = `url(${project.image_path})`;
+
+                project_div.setAttribute("href", project.href);
+                project_div.onclick = relocate
+
+                const title_div = document.createElement("div");
+                title_div.className = "title-div"
+
+                const title = document.createElement("h2");
+                title.innerText = project.name;
+                title.className = "project-title";
+                title_div.appendChild(title)
+
+                project_div.appendChild(title_div);
+                all_projects_div.appendChild(project_div);
+
+                setTimeout(() => {
+                    project_div.classList.add("fly-in-active");
+                }, 300);
+            }
+
+
+            function load() {
+                projects.forEach(function (project, index) {
+                    setTimeout(() => {
+                        render_project(project);
+                    }, 100 * index);
+                })
+            }
+
+            load();
+
+        </script>
 
         <script src="assets/js/particle-engine.js"></script>
         <script src="assets/js/particle-config.js" defer="defer"></script>
