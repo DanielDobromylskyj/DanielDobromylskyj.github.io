@@ -212,7 +212,7 @@ main {
 
 #all-projects {
   display: grid;
-  width: 90%;
+  width: 70%;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Adjust columns dynamically */
   gap: 10px; /* Space between grid items */
   justify-content: center; /* Center grid items horizontally */
