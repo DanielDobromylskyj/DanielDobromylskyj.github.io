@@ -5,6 +5,7 @@ html {
   margin: 0;
   padding: 0;
   height: 100%;
+  width: 100%;
   font-family: "Inter", sans-serif;
   background-color: #121e26;
 }
@@ -182,13 +183,12 @@ main {
 
 
 .page-wrapper {
-  position: relative;
+  position: absolute;
   z-index: 1;
-  max-width: 620px;
-  margin: 0 auto;
-  padding: 0px;
   z-index: 100;
   color: #ffffff;
+  margin: auto 0;
+  width: 100%;
 }
 
 
@@ -212,19 +212,22 @@ main {
 
 #all-projects {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Adjust columns dynamically */
+  width: 90%;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Adjust columns dynamically */
   gap: 10px; /* Space between grid items */
   justify-content: center; /* Center grid items horizontally */
   margin: 20px auto; /* Center the grid */
+
 }
 
+
 .project-div {
-  width: 200px;
-  height: 200px;
+  width: 300px;
+  height: 300px;
   background-size: cover;
   background-position: center;
   border: 1px solid #ccc;
-  /* margin: 10px; */
+  margin: auto;
   justify-content: center;
 
   border: rgba(0, 0, 0, 0.5);
