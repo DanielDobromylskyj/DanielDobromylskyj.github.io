@@ -3,8 +3,8 @@ const canvas = document.getElementById("backgroundCanvas");
 const ctx = canvas.getContext("2d");
 let frame = 0
 
-const particle_count = 500;
-const luminosity_distance = 150;
+const particle_count = 0.0003 * (window.innerHeight * window.innerWidth);
+const luminosity_distance = Math.min(window.innerHeight, window.innerWidth) / 4;
 const min_brightness = 0.1;
 const max_vel = 10;
 
