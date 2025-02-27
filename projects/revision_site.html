@@ -9,11 +9,20 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <script src="https://kit.fontawesome.com/e25e7ef6a3.js" crossorigin="anonymous"></script>
+        <style>
+            canvas {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+            }
+        </style>
     </head>
 
     <body>
-        <!-- Full-Width Header -->
-        <div id="particles-js"></div>
+        <canvas id="backgroundCanvas"></canvas>
+        <script src="../assets/floating_dots/background.js"></script>
 
         <div class="page-wrapper" style="width: 100vw">
 
@@ -27,9 +36,5 @@
 
             <div id="all-projects"></div>
         </div>
-
-
-        <script src="../assets/js/particle-engine.js"></script>
-        <script src="../assets/js/particle-config.js" defer="defer"></script>
     </body>
 </html>
