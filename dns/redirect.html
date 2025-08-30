@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>GitDNS</title>
+    </head>
+    <body>
+        <h1 id="text-output" style="text-align: center">Redirecting...</h1>
+        <script>
+            const config = {
+                "default-method": "http",
+                "default-endpoint": "/",
+                "default-redirect-port": 5000,
+                "github-ip-url": "https://raw.githubusercontent.com/DanielDobromylskyj/server-ip/refs/heads/main/ip.txt"
+            };
+
+            const text_output = document.getElementById('text-output');
+            const url = window.location.href;
+            const urlObj = new URL(url);
+            const params = new URLSearchParams(urlObj.search);
+
+
+            function redirect() {
+                fetch(config["github-ip-url"]).then(
+                    res => res.text()
+                ).then(target_ip => {
+                    if (target_ip) {
+                        let port = config["default-redirect-port"];
+                        let method = config["default-method"];
+                        let endpoint = config["default-endpoint"];
+
+                        if (params.get('port')) {
+                            port = params.get('port');
+                        }
+
+                        if (params.get('method')) {
+                            method = params.get('method');
+                        }
+
+                        if (params.get('endpoint')) {
+                            endpoint = params.get('endpoint');
+
+                            if (!endpoint.startsWith('/')) {
+                                endpoint = `/${endpoint}`;
+                            }
+
+                        }
+
+                        window.location.href = `${method}://${target_ip}:${port}${endpoint}`;
+
+                    } else {
+                        text_output.textContent = "Failed to redirect - No Ip Found";
+                    }
+                }).catch((err) => {
+                    console.log(err);
+                    text_output.innerHTML = `Failed to redirect - ${err}`;
+
+                })
+            }
+
+            redirect();
+        </script>
+    </body>
+</html>
