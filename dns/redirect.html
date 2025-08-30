@@ -28,8 +28,6 @@
                         let method = config["default-method"];
                         let endpoint = config["default-endpoint"];
 
-                        console.log(params)
-
                         if (params.get('port')) {
                             port = params.get('port');
                         }
@@ -47,7 +45,7 @@
 
                         }
 
-                        //window.location.href = `${method}://${target_ip}:${port}${endpoint}`;
+                        window.location.href = `${method}://${target_ip}:${port}${endpoint}`;
 
                     } else {
                         text_output.textContent = "Failed to redirect - No Ip Found";
